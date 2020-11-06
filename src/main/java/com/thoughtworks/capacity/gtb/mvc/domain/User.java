@@ -2,6 +2,7 @@ package com.thoughtworks.capacity.gtb.mvc.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Generated;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
@@ -13,6 +14,9 @@ import javax.validation.constraints.Pattern;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
+
+    private Integer id;
+
     @NotNull
     @Pattern(regexp = "[0-9a-zA-Z_]{3,10}")
     private String username;

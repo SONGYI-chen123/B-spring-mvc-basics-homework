@@ -7,6 +7,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @ResponseBody
@@ -23,5 +24,11 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     public void register(@RequestBody @Valid User user){
         userService.register(user);
+    }
+
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    public List<User> login(@RequestParam(name = "username",required = true)String username,@RequestParam(name = "password",required = true)String password){
+        List<User> users = userService.login(username,password);
+        return users;
     }
 }
