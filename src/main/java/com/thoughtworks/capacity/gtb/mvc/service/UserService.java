@@ -1,14 +1,12 @@
 package com.thoughtworks.capacity.gtb.mvc.service;
 
 import com.thoughtworks.capacity.gtb.mvc.domain.User;
+import com.thoughtworks.capacity.gtb.mvc.errors.Error;
+import com.thoughtworks.capacity.gtb.mvc.exceptions.loginException;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.Null;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -24,10 +22,16 @@ public class UserService {
         id++;
     }
 
-    public List<User> login(String username,String password) {
-        return userMap.values().stream()
-                .filter(user -> username == null || user.getUsername().equals(username))
-                .filter(car -> password == null || car.getPassword().equals(password))
-                .collect(Collectors.toList());
+    public User login(String username,String password) {
+
+        if(!userMap.containsValue(username)){
+            throw new loginException("incorrect username or password");
+        }
+        User user = userMap.get(username);
+        if(!user.getPassword().equals(password)){
+            throw new loginException("incorrect username or password");
+        }
+
+        return user;
     }
 }

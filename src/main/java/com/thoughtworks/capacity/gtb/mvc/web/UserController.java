@@ -27,8 +27,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public List<User> login(@RequestParam(name = "username",required = true)String username,@RequestParam(name = "password",required = true)String password){
-        List<User> users = userService.login(username,password);
-        return users;
+    public User login(@RequestParam(name = "username",required = true)String username,@RequestParam(name = "password",required = true)String password){
+        User user = userService.login(username,password);
+        return user;
     }
 }
